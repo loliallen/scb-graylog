@@ -1,8 +1,11 @@
 {
   "name": "scb-graylog",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "",
   "main": "build/index.js",
+  "keywords": [
+    "graylog", "udp", "typescript"
+  ],
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.0",

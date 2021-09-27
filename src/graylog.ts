@@ -13,6 +13,10 @@ type Config = {
   deflate?: "optimal" | "always" | "never";
   bufferSize?: number;
   ignoreErrors?: boolean;
+  container_name?: string;
+  container_id?: string;
+  tag?: string;
+  protocol?: number;
 };
 
 class Graylog extends EventEmitter {
@@ -33,6 +37,11 @@ class Graylog extends EventEmitter {
   public ignoreErrors: boolean;
 
   private helper = new Helper();
+  private container_id: string | undefined;
+  private container_name: string | undefined;
+  private protocol: number | undefined;
+  private tag: string | undefined;
+  
   private constructor() {
     super();
     this.client = null;
@@ -44,6 +53,14 @@ class Graylog extends EventEmitter {
     this.isDestroyed = false;
     this._onClose = false;
     this.ignoreErrors = false;
+
+    this._log = this._log.bind(this)
+    this.log = this.log.bind(this)
+    this.error = this.error.bind(this)
+    this.warning = this.warning.bind(this)
+    this.critical = this.critical.bind(this)
+    this.debug = this.debug.bind(this)
+    this.emergency = this.emergency.bind(this)
   }
 
   public setConfig({
@@ -53,6 +70,10 @@ class Graylog extends EventEmitter {
     deflate = "optimal",
     bufferSize = 1400,
     ignoreErrors = false,
+    container_id = "none",
+    container_name= "none",
+    protocol=0,
+    tag= "none.tag",
   }: Config): Graylog {
     if (servers.some(s => s.host.split('.').length !== 4 || s.host.includes(' ')))
       throw new Error('Server field is wrong')
@@ -62,6 +83,10 @@ class Graylog extends EventEmitter {
     this.deflate = deflate;
     this.bufferSize = bufferSize;
     this.ignoreErrors = ignoreErrors;
+    this.container_id = container_id;
+    this.container_name = container_name;
+    this.protocol = protocol;
+    this.tag = tag;
     return Graylog.getInstance();
   }
 
@@ -124,6 +149,10 @@ class Graylog extends EventEmitter {
     const message: Record<string, any> = {
       host: this.hostname,
       facility: this.facility,
+      tag: this.tag,
+      protocol: this.protocol,
+      container_id: this.container_id,
+      container_name: this.container_name,
     };
     const { payload } = this.helper.prepareMessagePayload(
       {
