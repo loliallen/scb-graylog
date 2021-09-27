@@ -11,7 +11,7 @@ npm install scb-graylog
 TypeScript
 
 ```ts
-import graylog, { appendToConsole } from "graylog";
+import graylog, { appendToConsole } from "scb-graylog";
 
 const gr = graylog.setConfig({
   servers: [{ host: " 10.0.15.34", port: 1246 }],
@@ -30,7 +30,7 @@ console.log("Logg..");
 JavaScript (NodeJS)
 
 ```js
-const graylog = require("graylog");
+const graylog = require("scb-graylog");
 
 const gr = graylog.setConfig({
   servers: [{ host: " 10.0.15.34", port: 1246 }],
