@@ -3,7 +3,7 @@
 Installation npm
 
 ```sh
-npm install graylog
+npm install scb-graylog
 ```
 
 ### Using
@@ -11,7 +11,7 @@ npm install graylog
 TypeScript
 
 ```ts
-import graylog from "graylog";
+import graylog, { appendToConsole } from "graylog";
 
 const gr = graylog.setConfig({
   servers: [{ host: " 10.0.15.34", port: 1246 }],
@@ -21,6 +21,10 @@ const gr = graylog.setConfig({
 gr.log("some data");
 // or
 graylog.log("some data");
+
+//
+appendToConsole();
+console.log("Logg..");
 ```
 
 JavaScript (NodeJS)
