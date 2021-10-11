@@ -1,4 +1,4 @@
-# Graylog v1.0.0
+# Graylog v1.2.2
 
 Installation npm
 

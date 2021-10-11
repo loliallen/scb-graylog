@@ -4,7 +4,9 @@
   "description": "",
   "main": "build/index.js",
   "keywords": [
-    "graylog", "udp", "typescript"
+    "graylog",
+    "udp",
+    "typescript"
   ],
   "devDependencies": {
     "@types/jest": "^27.0.1",

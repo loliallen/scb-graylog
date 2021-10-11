@@ -1,4 +1,4 @@
-import { graylog, redifineConsole } from "./index";
+import { graylog, redifineConsole } from "../src/index";
 
 describe("Graylog", () => {
   const config = {
